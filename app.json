@@ -1,0 +1,27 @@
+{
+    "name": "Vue 3 TS",
+    "description": "Vue 3 TS 🐝",
+    "image": "heroku/nodejs",
+    "repository": "https://github.com/ezequidias/vue3-ts",
+    "keywords": [
+        "svg",
+        "template",
+        "pwa",
+        "vue-router",
+        "bite",
+        "ssg",
+        "vite",
+        "storybookjs",
+        "vite-template",
+        "tailwindcss-v2",
+        "postcss-v8"
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        },
+        {
+            "url": "heroku-community/static"
+        }
+    ]
+}
