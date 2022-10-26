@@ -1,0 +1,20 @@
+version: "3.8"
+
+networks:
+  express_api_backend:
+    external: true
+  frontend:
+    driver: bridge
+
+services:
+  nuxtjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    image: express_admin_prod_nuxtjs
+    ports:
+      - "8070:8070"
+    networks:
+      - frontend
+      - express_api_backend

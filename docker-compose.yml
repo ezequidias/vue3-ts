@@ -1,0 +1,28 @@
+version: '3.8'
+
+networks:
+  # express_api_backend:
+  #   external: true
+  frontend:
+    driver: bridge
+
+services:
+
+  vuejs:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    #restart: always
+    image: express_vuejs
+    stdin_open: true
+    tty: true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "3000:3000"
+    command: "npm run dev -- --port 3000"
+    volumes:
+      - '.:/app'
+    networks:
+      - frontend
+      # - express_api_backend

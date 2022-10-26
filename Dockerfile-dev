@@ -1,0 +1,4 @@
+FROM node:14.18.2
+RUN apt update -y && apt upgrade -y
+WORKDIR /app
+EXPOSE 3000
