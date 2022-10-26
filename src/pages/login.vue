@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTheme } from 'vuetify'
-import logo from '@/assets/logo.svg?raw'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import authV1MaskDark from '@/assets/images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@/assets/images/pages/auth-v1-mask-light.png'
@@ -27,12 +26,6 @@ const isPasswordVisible = ref(false)
       max-width="448"
     >
       <VCardItem class="justify-center">
-        <template #prepend>
-          <div class="d-flex">
-            <div v-html="logo" />
-          </div>
-        </template>
-
         <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
           VUEJS
         </VCardTitle>

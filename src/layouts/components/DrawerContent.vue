@@ -88,27 +88,6 @@ import { VerticalNavLink, VerticalNavSectionTitle } from '@layouts'
 
     <VerticalNavLink
       :item="{
-        title: 'Typography',
-        to: 'typography',
-        icon: { icon: 'mdi-alpha-t-box-outline' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
-        title: 'Icons',
-        to: 'icons',
-        icon: { icon: 'mdi-eye-outline' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
-        title: 'Cards',
-        to: 'card-basic',
-        icon: { icon: 'mdi-credit-card-outline' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
         title: 'Tables',
         to: 'tables',
         icon: { icon: 'mdi-table' }
