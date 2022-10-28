@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { Anchor } from 'vuetify/lib/components'
 import avatar1 from '@/assets/images/avatars/avatar-1.png'
+import { useAuthStore } from '@/stores';
+const authStore = useAuthStore();
+
 const avatarBadgeProps = {
   dot: true,
   location: 'bottom right' as Anchor,
@@ -45,7 +48,7 @@ const avatarBadgeProps = {
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{authStore?.user?.email || 'Admin'}}
             </VListItemTitle>
             <VListItemSubtitle class="text-disabled">
               Admin
@@ -55,7 +58,7 @@ const avatarBadgeProps = {
           <VDivider class="my-2" />
           
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem to="/logout">
             <template #prepend>
               <VIcon
                 class="me-2"
