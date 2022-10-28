@@ -1,16 +1,20 @@
-# vue
+# Vue 3 CRUD + TypeScript + Vite + Pinia + Docker
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a project with user authentication
 
-## Recommended IDE Setup
+Repositories :
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+[Back-END - API REST - EXPRESS JS](https://github.com/ezequidias/express-ts)
 
-## Type Support for `.vue` Imports in TS
+[Front-END VUE JS 3](https://github.com/ezequidias/vue3-ts)
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
+## Tools
 
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+- [Vue.js 3](https://vuejs.org)
+- [Vite](https://vitejs.dev/)
+- [Pinia](https://pinia.vuejs.org/)
+- [TypeScript](https://vitejs.dev/)
+- [Docker](https://vitejs.dev/)
 
 ## Customize configuration
 
@@ -18,18 +22,20 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
+Setup With Docker:
+```sh
+docker-compose up -d
+```
+
+Setup with NPM
 ```sh
 npm install
-```
 
 ### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
 ### Type-Check, Compile and Minify for Production
-
-```sh
 npm run build
 ```
+
+## Screenshots
