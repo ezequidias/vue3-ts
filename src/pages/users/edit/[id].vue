@@ -47,7 +47,7 @@ onBeforeMount(async () => {
         md="12"
       >
         <!-- 👉 Horizontal Form -->
-        <VCard :loading="loading" title="Criar Usuário">
+        <VCard :loading="loading" title="Editar Usuário">
           <VCardText>
             
   <VForm @submit.prevent="() => {}">
