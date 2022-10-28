@@ -33,10 +33,12 @@ export const useAuthStore = defineStore({
           try{
             const res = await AuthService.register(user)
             this.status.loggedIn = false;
-            return Promise.resolve(res.data);
+            this.user = null;
+            return res;
           }catch(error){
             this.status.loggedIn = false;
-            return error
+            this.user = null;
+            throw error
           }
         }
     },

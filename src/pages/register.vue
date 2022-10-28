@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { useTheme } from 'vuetify'
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import authV1MaskDark from '@/assets/images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@/assets/images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@/assets/images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@/assets/images/pages/auth-v1-tree.png'
+import { useAuthStore } from '@/stores';
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const authStore = useAuthStore();
+
 const form = ref({
-  username: '',
   email: '',
   password: '',
-  privacyPolicies: false,
 })
 const vuetifyTheme = useTheme()
 const authThemeMask = computed(() => {
@@ -18,14 +20,34 @@ const authThemeMask = computed(() => {
     : authV1MaskDark
 })
 const isPasswordVisible = ref(false)
+const message = ref('')
+const loading = ref(false)
+
+const handleSignUp = async () => {
+  loading.value = true;
+  try{
+    await authStore.register(form.value)
+    await authStore.login(form.value)
+    router.push("/");
+    message.value = ''
+  }catch(error: any){
+    message.value = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+  }finally{
+    loading.value = false;
+  }
+}
 </script>
 
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard
+      :loading="loading"
       class="auth-card pa-4 pt-7"
       max-width="448"
     >
+    <VAlert color="error" v-if="message">
+      {{message}}
+    </VAlert>
       <VCardItem class="justify-center">
         <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
           VUEJS
@@ -44,13 +66,6 @@ const isPasswordVisible = ref(false)
       <VCardText>
         <VForm @submit.prevent="() => {}">
           <VRow>
-            <!-- Username -->
-            <VCol cols="12">
-              <VTextField
-                v-model="form.username"
-                label="Username"
-              />
-            </VCol>
             <!-- email -->
             <VCol cols="12">
               <VTextField
@@ -89,7 +104,9 @@ const isPasswordVisible = ref(false)
 
               <VBtn
                 block
+                :disabled="loading"
                 type="submit"
+                @click="handleSignUp"
               >
                 Sign up
               </VBtn>
@@ -109,22 +126,7 @@ const isPasswordVisible = ref(false)
               </RouterLink>
             </VCol>
 
-            <VCol
-              cols="12"
-              class="d-flex align-center"
-            >
-              <VDivider />
-              <span class="mx-4">or</span>
-              <VDivider />
-            </VCol>
-
-            <!-- auth providers -->
-            <VCol
-              cols="12"
-              class="text-center"
-            >
-              <AuthProvider />
-            </VCol>
+          
           </VRow>
         </VForm>
       </VCardText>

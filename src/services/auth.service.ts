@@ -13,7 +13,7 @@ class AuthService {
   }
 
   async register(user: any) {
-    const res = axios.post('signup', user);
+    const res = await axios.post('/signup', user);
     return res
   }
 }
