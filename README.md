@@ -13,8 +13,8 @@ Repositories :
 - [Vue.js 3](https://vuejs.org)
 - [Vite](https://vitejs.dev/)
 - [Pinia](https://pinia.vuejs.org/)
-- [TypeScript](https://vitejs.dev/)
-- [Docker](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Docker](https://www.docker.com/)
 
 ## Customize configuration
 
