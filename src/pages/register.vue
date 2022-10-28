@@ -20,7 +20,6 @@ const authThemeMask = computed(() => {
     : authV1MaskDark
 })
 const isPasswordVisible = ref(false)
-const message = ref('')
 const loading = ref(false)
 
 const handleSignUp = async () => {
@@ -29,9 +28,7 @@ const handleSignUp = async () => {
     await authStore.register(form.value)
     await authStore.login(form.value)
     router.push("/");
-    message.value = ''
   }catch(error: any){
-    message.value = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
   }finally{
     loading.value = false;
   }
@@ -45,9 +42,6 @@ const handleSignUp = async () => {
       class="auth-card pa-4 pt-7"
       max-width="448"
     >
-    <VAlert color="error" v-if="message">
-      {{message}}
-    </VAlert>
       <VCardItem class="justify-center">
         <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
           VUEJS
