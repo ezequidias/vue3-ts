@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import avatar1 from '@/assets/images/avatars/avatar-1.png'
-const form = ref({email: '', password: ''})
 const $axios = inject('$axios')
 const router = useRouter()
 const loading = ref(false)
 
 const formData = {
-  avatarImg: avatar1,
+  image: avatar1,
   name: '',
 }
 const dataLocal = ref(structuredClone(formData))
@@ -19,18 +18,18 @@ const changeAvatar = (file: Event) => {
     fileReader.readAsDataURL(files[0])
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string')
-        dataLocal.value.avatarImg = fileReader.result
+        dataLocal.value.image = fileReader.result
     }
   }
 }
 const resetAvatar = () => {
-  dataLocal.value.avatarImg = formData.avatarImg
+  dataLocal.value.image = formData.image
 }
 
 const createCategory = async () => {
   loading.value = true;
   try{
-    await $axios.post(`/categories`, { name: dataLocal.value.name, image: dataLocal.value.avatarImg })
+    await $axios.post(`/categories`, { name: dataLocal.value.name, image: dataLocal.value.image })
     router.push("/categories");
   }catch(error: any){
   }finally{
@@ -42,7 +41,7 @@ const createCategory = async () => {
 <template>
   <VRow>
     <VCol cols="12">
-     <VBtn to="/users">
+     <VBtn to="/categories">
           Listar Categorias
         </VBtn>
     </VCol>
@@ -76,7 +75,7 @@ const createCategory = async () => {
             rounded="lg"
             size="100"
             class="me-6"
-            :image="dataLocal.avatarImg"
+            :image="dataLocal.image"
           />
 
           <!-- 👉 Upload Photo -->
