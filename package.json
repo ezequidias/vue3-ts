@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "npm run build:icons && vite --host",
     "build": "npm run build:icons && vite build",
-    "start": "vite preview",
-    "serve": "vite preview --host --port 80",
+    "start": "vite preview --port $PORT",
     "preview": "vite preview --host --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . -c .eslintrc.js --fix --ext .ts,.js,.vue,.tsx,.jsx",
