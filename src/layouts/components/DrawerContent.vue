@@ -28,13 +28,6 @@ import { VerticalNavLink, VerticalNavSectionTitle } from '@layouts'
     />
     <VerticalNavLink
       :item="{
-        title: 'Account Settings',
-        to: 'account-settings',
-        icon: { icon: 'mdi-account-cog-outline' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
         title: 'Usuários',
         to: 'users',
         icon: { icon: 'mdi-account-outline' }
@@ -54,52 +47,7 @@ import { VerticalNavLink, VerticalNavSectionTitle } from '@layouts'
         icon: { icon: 'mdi-box-variant-closed' }
       }"
     />
-    <!-- 👉 Pages -->
-    <VerticalNavSectionTitle :item="{ heading: 'Pages' }" />
-    <VerticalNavLink
-      :item="{
-        title: 'Login',
-        to: 'login',
-        target: '_blank',
-        icon: { icon: 'mdi-login' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
-        title: 'Register',
-        to: 'register',
-        target: '_blank',
-        icon: { icon: 'mdi-account-plus-outline' }
-      }"
-    />
-
-    <!-- ℹ️ This path doesn't exist so 404 route will catch this undefined path -->
-    <VerticalNavLink
-      :item="{
-        title: 'Error',
-        to: { path: '/error' },
-        target: '_blank',
-        icon: { icon: 'mdi-alert-circle-outline' }
-      }"
-    />
-
-    <!-- 👉 User Interface -->
-    <VerticalNavSectionTitle :item="{ heading: 'User Interface' }" />
-
-    <VerticalNavLink
-      :item="{
-        title: 'Tables',
-        to: 'tables',
-        icon: { icon: 'mdi-table' }
-      }"
-    />
-    <VerticalNavLink
-      :item="{
-        title: 'Form Layouts',
-        to: 'form-layouts',
-        icon: { icon: 'mdi-form-select' }
-      }"
-    />
+   
   </ul>
 
 </template>
