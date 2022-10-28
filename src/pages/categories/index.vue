@@ -5,10 +5,10 @@ const loading = ref(false)
 const dialog = ref(false)
 const dataDel = ref({})
 
-const getUsers = async () => {
+const getCategories = async () => {
   loading.value = true;
   try{
-    const res = await $axios.get('/users')
+    const res = await $axios.get('/categories')
     users.value = res.data
   }catch(error: any){
   }finally{
@@ -21,11 +21,11 @@ const confirmDel = (user) => {
   dataDel.value = user
 }
 
-const userDelete = async () => {
+const categoryDelete = async () => {
   loading.value = true;
   try{
-    const res = await $axios.delete(`/users/${dataDel.value.id}`)
-    getUsers()
+    const res = await $axios.delete(`/categories/${dataDel.value.id}`)
+    getCategories()
     dialog.value = false
     dataDel.value = {}
   }catch(error: any){
@@ -40,7 +40,7 @@ const rejectDel = () => {
 }
 
 onMounted(async () => {
-  await getUsers()
+  await getCategories()
 })
 </script>
 
@@ -48,12 +48,12 @@ onMounted(async () => {
   <VRow>
     <!-- basic -->
     <VCol cols="12">
-     <VBtn to="/users/create">
-          Criar Usuário
+     <VBtn to="/categories/create">
+          Criar Categoria
         </VBtn>
     </VCol>
     <VCol cols="12">
-      <VCard :loading="loading" title="Todos os Usuários">
+      <VCard :loading="loading" title="Todas as Categorias">
         <VTable>
     <thead>
       <tr>
@@ -61,7 +61,10 @@ onMounted(async () => {
           ID
         </th>
         <th class="text-uppercase">
-          E-mail
+          Imagem
+        </th>
+        <th class="text-uppercase">
+          Nome
         </th>
         <th class="text-uppercase">
           Opções
@@ -75,10 +78,13 @@ onMounted(async () => {
       >
         <td>{{ item.id }}</td>
         <td>
-          {{ item.email }}
+          <div class="m-2"><img :src="item.image" width="50" height="50" /></div>
         </td>
         <td>
-        <VBtn :to="`/users/edit/${item.id}`" x-small color="primary" class="mr-2">
+          {{ item.name }}
+        </td>
+        <td>
+        <VBtn :to="`/categories/edit/${item.id}`" x-small color="primary" class="mr-2">
           Editar
         </VBtn>
          <VBtn @click="confirmDel(item)" x-small color="error">
@@ -100,13 +106,13 @@ onMounted(async () => {
         <v-card-title class="text-h5">
           Voce deseja deletar?
         </v-card-title>
-        <v-card-text><b>ID:</b> {{dataDel.id}} <br> <b>Email:</b> {{dataDel.email}}</v-card-text>
+        <v-card-text><b>ID:</b> {{dataDel.id}} <br> <b>Nome:</b> {{dataDel.name}}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="error" text @click="rejectDel" >
             Não Deletar
           </v-btn>
-          <v-btn color="success" text @click="userDelete" >
+          <v-btn color="success" text @click="categoryDelete" >
             Sim
           </v-btn>
         </v-card-actions>
