@@ -1,4 +1,4 @@
-import { setToken } from '@/utils/AuthService';
+import { removeToken, setToken } from '@/utils/AuthService';
 import axios from '@/utils/request';
 
 class AuthService {
@@ -9,7 +9,7 @@ class AuthService {
   }
 
   async logout() {
-    localStorage.removeItem('user');
+    removeToken()
   }
 
   async register(user: any) {
