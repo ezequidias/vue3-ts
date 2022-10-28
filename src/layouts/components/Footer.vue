@@ -12,6 +12,7 @@
         class="mx-1"
       />
       By <a
+        href="https://github.com/ezequidias"
         target="_blank"
         rel="noopener noreferrer"
         class="text-primary ms-1"
