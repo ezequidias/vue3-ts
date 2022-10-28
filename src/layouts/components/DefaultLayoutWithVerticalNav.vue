@@ -11,29 +11,22 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
   <VerticalNavLayout>
     <!-- 👉 navbar -->
     <template #navbar>
-      <VTextField
-        rounded
-        prepend-inner-icon="mdi-magnify"
-        density="compact"
-        max-width="100px"
-        class="app-bar-search d-none d-sm-block"
-      />
-
       <VSpacer />
 
-      <NavbarThemeSwitcher />
-      <VBtn
-        icon
-        variant="text"
-        color="default"
-        class="me-2"
-        size="small"
+         <a
+        href="https://github.com/ezequidias/vue3-ts"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: inherit"
       >
         <VIcon
-          icon="mdi-bell-outline"
-          size="24"
+          class="ms-6 me-4"
+          icon="mdi-github"
         />
-      </VBtn>
+      </a>
+
+      <NavbarThemeSwitcher />
+   
       <UserProfile />
     </template>
 
