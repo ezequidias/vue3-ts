@@ -1,6 +1,4 @@
 import { useAuthStore } from '@/stores';
-import { getToken } from '@/utils/AuthService';
-import axios from '@/utils/request';
 import { setupLayouts } from 'virtual:generated-layouts';
 import { createRouter, createWebHistory } from 'vue-router';
 import routes from '~pages';
@@ -20,11 +18,11 @@ router.beforeEach(async (to, from) => {
     const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
     const auth = useAuthStore();
-    const token = getToken()
+    const token = localStorage.getItem(import.meta.env.VITE_TOKEN_NAME)
 
     if(!auth.user && token){
       try{
-        const user_details = await axios.get('user')
+        const user_details = await auth.$axios.get('user')
         auth.status.loggedIn = true
         auth.user = user_details.data
         return '/'
