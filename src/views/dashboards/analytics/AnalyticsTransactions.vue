@@ -1,59 +1,50 @@
 <script setup lang="ts">
-const statistics = [
+
+const props = defineProps<{
+  data: Object
+}>()
+
+const statistics = ref([
   {
-    title: 'Sales',
-    stats: '245k',
-    icon: 'mdi-trending-up',
-    color: 'primary',
-  },
-  {
-    title: 'Customers',
-    stats: '12.5k',
+    title: 'Usuários',
+    slug: 'users',
+    stats: '0',
     icon: 'mdi-account-outline',
     color: 'success',
   },
   {
-    title: 'Product',
-    stats: '1.54k',
+    title: 'Produtos',
+    slug: 'products',
+    stats: '0',
     icon: 'mdi-cellphone-link',
     color: 'warning',
   },
   {
-    title: 'Revenue',
-    stats: '$88k',
-    icon: 'mdi-currency-usd',
+    title: 'Categorias',
+    slug: 'categories',
+    stats: '0',
+    icon: 'mdi-trending-up',
     color: 'info',
   },
-]
+])
+
+watch(() => props.data, (val) => {
+  statistics.value.map(item => {
+    if(item.slug == 'users') item.stats = val.total_users
+    if(item.slug == 'products') item.stats = val.total_products
+    if(item.slug == 'categories') item.stats = val.total_categories
+  })
+},{immediate:true, deep:true});
+
 </script>
 
 <template>
   <VCard>
     <VCardItem>
-      <VCardTitle>Transactions</VCardTitle>
-
-      <template #append>
-        <div class="me-n3">
-          <VBtn
-            icon
-            color="default"
-            size="x-small"
-            variant="text"
-          >
-            <VIcon
-              size="24"
-              icon="mdi-dots-vertical"
-            />
-          </VBtn>
-        </div>
-      </template>
+      <VCardTitle>Resumo</VCardTitle>
     </VCardItem>
 
     <VCardText>
-      <h6 class="text-sm mb-12">
-        <span>Total 48.5% Growth 😎</span>
-        <span class="font-weight-regular"> this month</span>
-      </h6>
 
       <VRow>
         <VCol
