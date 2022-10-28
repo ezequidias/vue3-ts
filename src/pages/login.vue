@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useTheme } from 'vuetify'
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import authV1MaskDark from '@/assets/images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@/assets/images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@/assets/images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@/assets/images/pages/auth-v1-tree.png'
+import { useAuthStore } from '@/stores';
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const authStore = useAuthStore();
+
 const form = ref({
   email: '',
   password: '',
-  remember: false,
 })
 const vuetifyTheme = useTheme()
 const authThemeMask = computed(() => {
@@ -17,14 +20,32 @@ const authThemeMask = computed(() => {
     : authV1MaskDark
 })
 const isPasswordVisible = ref(false)
-</script>
+const message = ref('')
+const loading = ref(false)
 
+const handleLogin = async () => {
+  loading.value = true;
+  try{
+    await authStore.login(form.value)
+    message.value = ''
+    router.push("/");
+  }catch(error: any){
+    message.value = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+  }finally{
+    loading.value = false;
+  }
+}
+</script>
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard
+      :loading="loading"
       class="auth-card pa-4 pt-7"
       max-width="448"
     >
+       <VAlert color="error" v-if="message">
+      {{message}}
+    </VAlert>
       <VCardItem class="justify-center">
         <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
           VUEJS
@@ -62,26 +83,13 @@ const isPasswordVisible = ref(false)
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
               />
 
-              <!-- remember me checkbox -->
-              <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
-                <VCheckbox
-                  v-model="form.remember"
-                  label="Remember me"
-                />
-
-                <a
-                  class="ms-2 mb-1"
-                  href="javascript:void(0)"
-                >
-                  Forgot Password?
-                </a>
-              </div>
-
               <!-- login button -->
               <VBtn
+              class="mt-6"
                 block
+                :disabled="loading"
                 type="submit"
-                to="/"
+                @click="handleLogin"
               >
                 Login
               </VBtn>
@@ -101,22 +109,6 @@ const isPasswordVisible = ref(false)
               </RouterLink>
             </VCol>
 
-            <VCol
-              cols="12"
-              class="d-flex align-center"
-            >
-              <VDivider />
-              <span class="mx-4">or</span>
-              <VDivider />
-            </VCol>
-
-            <!-- auth providers -->
-            <VCol
-              cols="12"
-              class="text-center"
-            >
-              <AuthProvider />
-            </VCol>
           </VRow>
         </VForm>
       </VCardText>
