@@ -5,6 +5,7 @@ import vuetify from '@/plugins/vuetify'
 import { loadFonts } from '@/plugins/webfontloader'
 import router from '@/router'
 import '@/styles/styles.scss'
+import axios from '@/utils/request'
 import '@core/scss/index.scss'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
@@ -12,6 +13,7 @@ import { createApp } from 'vue'
 loadFonts()
 
 const app = createApp(App)
+app.config.globalProperties.$axios = axios;
 
 app.use(vuetify)
 app.use(createPinia())
